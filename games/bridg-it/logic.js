@@ -1,0 +1,17 @@
+// Bridges are identified by their crossing point. Player 0 connects left–right,
+// player 1 top–bottom; the outer boundary of each colour is already connected.
+export function fresh(size){return {size, bridges:{},turn:0,moves:0,winner:null};}
+export function positions(n){const a=[];for(let y=1;y<2*n;y++)for(let x=1;x<2*n;x++)if(x%2===y%2)a.push(`${x}-${y}`);return a;}
+export function endpoints(key,player){const [x,y]=key.split('-').map(Number);const horizontal=(x%2===1)===(player===0);return horizontal?[[x-1,y],[x+1,y]]:[[x,y-1],[x,y+1]];}
+function pointKey(p){return p.join(',');}
+export function connected(state,player){const n=state.size,links=new Map();function add(a,b){a=pointKey(a);b=pointKey(b);if(!links.has(a))links.set(a,[]);if(!links.has(b))links.set(b,[]);links.get(a).push(b);links.get(b).push(a);}
+ for(const [key,owner] of Object.entries(state.bridges))if(owner===player+1){const [a,b]=endpoints(key,player);add(a,b);}
+ const starts=[];for(let i=0;i<n;i++){if(player===0){starts.push([0,2*i+1]);if(i<n-1){add([0,2*i+1],[0,2*i+3]);add([2*n,2*i+1],[2*n,2*i+3]);}}else{starts.push([2*i+1,0]);if(i<n-1){add([2*i+1,0],[2*i+3,0]);add([2*i+1,2*n],[2*i+3,2*n]);}}}
+ const seen=new Set(starts.map(pointKey)),queue=[...seen];for(let i=0;i<queue.length;i++){const [x,y]=queue[i].split(',').map(Number);if(player===0?x===2*n:y===2*n)return true;for(const next of links.get(queue[i])||[])if(!seen.has(next)){seen.add(next);queue.push(next);}}return false;
+}
+export function play(state,key){if(state.winner!==null||state.bridges[key]||!positions(state.size).includes(key))return false;const player=state.turn;state.bridges[key]=player+1;state.moves++;if(connected(state,player))state.winner=player;else state.turn=1-player;return true;}
+// Minimum number of free bridges needed to join opposite edges.
+export function distance(state,player){const n=state.size,links=new Map();function add(a,b,cost){a=pointKey(a);b=pointKey(b);if(!links.has(a))links.set(a,[]);if(!links.has(b))links.set(b,[]);links.get(a).push([b,cost]);links.get(b).push([a,cost]);}
+ for(const key of positions(n)){const owner=state.bridges[key];if(owner&&owner!==player+1)continue;const [a,b]=endpoints(key,player);add(a,b,owner?0:1);}
+ const dist=new Map(),queue=[];for(let i=0;i<n;i++){const p=pointKey(player===0?[0,2*i+1]:[2*i+1,0]);dist.set(p,0);queue.push(p);}while(queue.length){queue.sort((a,b)=>dist.get(a)-dist.get(b));const at=queue.shift(),d=dist.get(at),[x,y]=at.split(',').map(Number);if(player===0?x===2*n:y===2*n)return d;for(const [next,cost] of links.get(at)||[]){const nd=d+cost;if(nd<(dist.get(next)??Infinity)){dist.set(next,nd);queue.push(next);}}}return Infinity;}
+export function chooseMove(state,difficulty,random=Math.random){const options=positions(state.size).filter(x=>!state.bridges[x]);if(!options.length)return null;const choose=a=>a[Math.floor(random()*a.length)];if(difficulty==='facil'&&random()<.6)return choose(options);const player=state.turn,other=1-player;const rated=options.map(key=>{const s=structuredClone(state);play(s,key);return {key,win:s.winner===player,own:distance(s,player),opponent:distance(s,other)};});const wins=rated.filter(x=>x.win);if(wins.length)return choose(wins).key;let best=-Infinity,choices=[];for(const item of rated){const value=(Number.isFinite(item.opponent)?item.opponent:100)*1.1-(Number.isFinite(item.own)?item.own:100)+(difficulty==='medio'?random()*.8:0);if(value>best+1e-6){best=value;choices=[item];}else if(Math.abs(value-best)<1e-6)choices.push(item);}return choose(choices).key;}

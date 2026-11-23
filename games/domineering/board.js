@@ -1,0 +1,8 @@
+// Render the actual pairs rather than treating the two halves as unrelated cells.
+export function renderDomineering(game,mine,allowed){
+ const legal=new Set();const n=game.size;
+ if(allowed)for(let i=0;i<n*n;i++){const row=Math.floor(i/n),col=i%n,next=game.turn===0?i+n:i+1;if(!game.cells[i]&&(game.turn===0?row<n-1:col<n-1)&&!game.cells[next])legal.add(i);}
+ const parts=new Map();for(const piece of game.dominoes||[]){parts.set(piece.index,{...piece,part:'start'});parts.set(piece.other,{...piece,part:'end'});}
+ const cells=game.cells.map((value,index)=>{const row=Math.floor(index/n)+1,col=index%n+1,part=parts.get(index),who=value?(value-1===mine?'mine':'rival'):'',orientation=value===1?'vertical':'horizontal',end=part?.part||'single',label=`Fila ${row}, columna ${col}${value?`, dominó ${who==='mine'?'tuyo':'rival'}, ${orientation}`:', vacía'}`;return `<button class="domino-cell ${value?`occupied ${who} ${orientation} ${end}`:''} ${legal.has(index)?'available':''} ${game.last.includes(index)?'recent':''}" data-index="${index}" ${legal.has(index)?'':'disabled'} aria-label="${label}">${value?'<span class="domino-face" aria-hidden="true"><i></i></span>':''}</button>`;}).join('');
+ return `<section class="domino-panel"><div class="domino-panel-head"><div><span class="domino-overline">EL TABLERO</span><h2>Deja al rival sin espacio<span>.</span></h2></div><span class="domino-size">${n} × ${n}</span></div><div class="domino-board" style="--n:${n}" role="group" aria-label="Tablero de Domineering">${cells}</div><div class="domino-legend"><span><i class="domino-key mine"></i>Tú · ${mine===0?'vertical':'horizontal'}</span><span><i class="domino-key rival"></i>Rival · ${mine===0?'horizontal':'vertical'}</span></div></section>`;
+}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f7f2">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Hamdoku">
+  
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <meta name="description" content="Un pequeño juego de lógica con grandes mejillas.">
+  <title>Hamdoku — un sudoku muy mono</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../../assets/game-shell.css"></head>
+<body data-tutorial-game="hamdoku"><nav class="suite-nav" aria-label="Navegación de Pasatiempos"><a href="../../">‹ <strong>Pasatiempos</strong> <span>by AlonSoftware</span></a><span class="suite-game">Hamdoku</span></nav>
+  <div class="splash" id="splash" role="status" aria-label="Cargando Hamdoku">
+    <img src="icons/icon-192.png" alt="" width="96" height="96">
+    <span class="splash-name">hamdoku<span>.</span></span>
+    <span class="splash-caption">UN RATITO PARA TI ✿</span>
+  </div>
+  <noscript><style>.splash{display:none}</style><p>Activa JavaScript para jugar a Hamdoku.</p></noscript>
+  <main class="app" id="app">
+    <header class="topbar"><button class="brand" data-go="home" aria-label="Hamdoku, inicio"><span class="brand-mark">✿</span> hamdoku<span class="brand-dot">.</span></button><span class="top-note">UN RATITO PARA TI <span>✳</span></span></header>
+    <div id="screen" class="screen"></div>
+    <footer><span>HECHO CON <span class="heart">♥</span> Y SEMILLITAS</span><span>© HAMDOKU CLUB</span></footer>
+  </main>
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title"></div>
+  <script src="levels.js"></script>
+  <script src="app.js"></script>
+  
+<script type="module" src="../../assets/tutorial.js"></script></body>
+</html>
