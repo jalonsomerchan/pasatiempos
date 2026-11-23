@@ -1,7 +1,18 @@
-const CACHE = 'pasatiempos-v23';
+const CACHE = 'pasatiempos-v27';
 const ASSETS = [
   "./",
   "./index.html",
+  "./games/puzzles/app.js",
+  "./games/puzzles/style.css",
+  "./games/hashi/",
+  "./games/hashi/index.html",
+  "./games/hashi/levels.json",
+  "./games/tango/",
+  "./games/tango/index.html",
+  "./games/tango/levels.json",
+  "./games/nurikabe/",
+  "./games/nurikabe/index.html",
+  "./games/nurikabe/levels.json",
   "./games/quoridor/",
   "./games/abalone/",
   "./games/abalone/index.html",
@@ -77,6 +88,8 @@ const ASSETS = [
   "./games/hamdoku/",
   "./games/slitherlink/",
   "./manifest.webmanifest",
+  "./assets/coin-toss.js",
+  "./assets/coin-toss.css",
   "./assets/app.js",
   "./assets/difficulty.js",
   "./assets/game-shell.css",

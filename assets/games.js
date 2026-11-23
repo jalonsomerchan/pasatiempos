@@ -17,6 +17,9 @@ export const games = [
   {id:'mancala', name:'Mancala', category:'ESTRATEGIA', description:'Siembra semillas, captura y llena tu almacén.', players:'Solo o con un amigo', symbol:'◌', path:'games/mancala/', roomChannel: code => /^\d{4}$/.test(code) ? `pasatiempos-mancala-v1-${code}` : null},
   {id:'abalone', name:'Abalone', category:'ESTRATEGIA', description:'Empuja seis canicas rivales fuera del tablero.', players:'Solo o con un amigo', symbol:'◉', path:'games/abalone/', roomChannel: code => /^\d{4}$/.test(code) ? `pasatiempos-abalone-v1-${code}` : null},
   {id:'molino', name:'El Molino', category:'ESTRATEGIA', description:'Forma líneas de tres y captura las fichas del rival.', players:'Solo o con un amigo', symbol:'⌗', path:'games/molino/', roomChannel: code => /^\d{4}$/.test(code) ? `pasatiempos-molino-v1-${code}` : null},
+  {id:'hashi', name:'Hashi', category:'LÓGICA', description:'Conecta todas las islas con puentes.', players:'Un jugador', symbol:'♒', path:'games/hashi/'},
+  {id:'tango', name:'Tango', category:'LÓGICA', description:'Equilibra soles y lunas en cada fila y columna.', players:'Un jugador', symbol:'☯', path:'games/tango/'},
+  {id:'nurikabe', name:'Nurikabe', category:'LÓGICA', description:'Descubre las islas y conecta el mar.', players:'Un jugador', symbol:'◩', path:'games/nurikabe/'},
   {id:'hamdoku', name:'Hamdoku', category:'LÓGICA', description:'Un pequeño rompecabezas de hámsteres y grandes ideas.', players:'Un jugador', symbol:'✿', path:'games/hamdoku/'},
   {id:'slitherlink', name:'Slitherlink', category:'LÓGICA', description:'Une los puntos y descubre un único camino cerrado.', players:'Un jugador', symbol:'⌁', path:'games/slitherlink/'}
 ];
