@@ -1,4 +1,8 @@
 :root{--suite-height:54px;--game-viewport:calc(100dvh - var(--suite-height))}
+/* Safari: los toques rápidos no deben ampliar la página durante una partida.
+   Se conservan el desplazamiento y el zoom con pellizco. Los tableros que
+   implementan sus propios gestos pueden seguir usando touch-action: none. */
+:where(html,body,*){touch-action:manipulation}
 .suite-nav{height:var(--suite-height);padding:0 max(20px,calc((100vw - 1100px)/2));display:flex;align-items:center;justify-content:space-between;background:#203d34;color:#fff;font:600 14px/1.2 system-ui,sans-serif;position:relative;z-index:99}.suite-nav a{color:inherit;text-decoration:none;display:flex;align-items:baseline;gap:6px}.suite-nav a:hover{text-decoration:underline}.suite-nav a:focus-visible{outline:2px solid white;outline-offset:4px}.suite-nav span{font-size:11px;color:#c1d7c5}.suite-nav .suite-game{text-transform:uppercase;letter-spacing:.1em}@media(max-width:400px){.suite-nav a span{display:none}}
 /* Las portadas de los juegos siguen la estructura y proporciones de Quoridor. */
 body:has(.game-home){background:#f3f4ed;color:#2a4132;font-family:system-ui,-apple-system,sans-serif}
