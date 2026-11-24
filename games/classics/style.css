@@ -27,3 +27,8 @@
 /* Keep the local Isolation player at the bottom edge in online games. */
 .isolation-board.isolation-flipped{transform:rotate(180deg)}
 .isolation-board.isolation-flipped>.classic-cell{transform:rotate(180deg)}
+
+/* Llegada de fichas en los juegos incorporados. */
+.new-game-arrival{animation:new-game-arrival .3s cubic-bezier(.2,.8,.2,1) both;transform-box:fill-box;transform-origin:center}@keyframes new-game-arrival{from{opacity:.45;scale:.72}to{opacity:1;scale:1}}@media(prefers-reduced-motion:reduce){.new-game-arrival{animation:none}}
+
+.new-game-reversed .score-mine .score-key{background:#c47862}.new-game-reversed .score-rival .score-key{background:#527e5b}

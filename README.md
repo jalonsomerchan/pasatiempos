@@ -33,3 +33,12 @@ Sube el contenido a un repositorio en la rama `main` y selecciona **Settings →
 Mancala usa la variante Kalah: seis hoyos por jugador y cuatro semillas por hoyo.
 
 El Molino permite saltar a cualquier punto libre cuando quedan tres fichas, y termina en empate por triple repetición o 100 movimientos sin captura. Abalone usa la colocación inicial clásica y seis expulsiones para ganar.
+
+## Juegos de estrategia adicionales
+
+Reversi, Cuatro en raya, Conecta 6, Damas, Líneas de Acción, Squadro, Santorini, Onitama, YINSH y El zorro y las ocas están disponibles contra el ordenador o mediante sala en línea. Las partidas individuales se guardan en el navegador y dispositivo actuales; las salas requieren conexión.
+
+- Damas sigue la variante inglesa: capturas obligatorias, coronación al final del turno y tablas tras 40 turnos por jugador sin captura ni movimiento de peón.
+- Santorini utiliza las reglas básicas sin poderes.
+- El zorro y las ocas usa trece ocas, desplazamientos ortogonales, avance o movimiento lateral de las ocas y saltos encadenados obligatorios del zorro. El zorro gana tras nueve capturas; las ocas ganan bloqueándolo.
+- Líneas de Acción, Onitama y El zorro y las ocas declaran empate por triple repetición.

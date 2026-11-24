@@ -1,0 +1,10 @@
+// Progreso 0–6: ida; 6–12: vuelta. 12 indica ficha completada.
+export const speeds=[[1,3,2,3,1],[3,1,2,1,3]];
+export function fresh(){return {id:'squadro',size:7,cells:Array(49).fill(0),progress:[Array(5).fill(0),Array(5).fill(0)],turn:0,moves:0,winner:null,last:null};}
+export function coordinate(progress){return progress<=6?progress:12-progress}
+export function legal(s){return s.winner===null?s.progress[s.turn].flatMap((p,i)=>p<12?[{piece:i}]:[]):[]}
+function opponentAt(s,player,lane,pos){if(pos<1||pos>5)return -1;const other=1-player,j=pos-1,p=s.progress[other][j];return p>0&&p<12&&coordinate(p)===lane+1?j:-1}
+export function play(s,m){if(!m||!legal(s).some(x=>x.piece===m.piece))return false;const p=s.turn,i=m.piece,original=s.progress[p][i],returning=original>=6,step=returning?4-speeds[p][i]:speeds[p][i],dir=returning?-1:1;let position=coordinate(original),distance=0,crossed=[];
+ while(distance<step){position+=dir;distance++;if(position===0||position===6)break;let other=opponentAt(s,p,i,position);if(other<0)continue;do{crossed.push(other);s.progress[1-p][other]=s.progress[1-p][other]>=6?6:0;position+=dir;if(position===0||position===6)break;other=opponentAt(s,p,i,position);}while(other>=0);break;}
+ s.progress[p][i]=returning?12-position:position;s.moves++;s.last={player:p,piece:i,from:original,to:s.progress[p][i],crossed};if(s.progress[p].filter(x=>x===12).length>=4)s.winner=p;else s.turn=1-p;return true;}
+export function chooseMove(s,difficulty='medio',random=Math.random){const choices=legal(s);if(!choices.length)return null;const pick=a=>a[Math.floor(random()*a.length)];if(difficulty==='facil'&&random()<.55)return pick(choices);let best=-Infinity,top=[];for(const m of choices){const x=structuredClone(s),p=s.turn;play(x,m);let score=x.winner===p?10000:(x.progress[p][m.piece]-s.progress[p][m.piece])*3+x.last.crossed.length*5+(x.progress[p][m.piece]===12?5:0);score+=random()*(difficulty==='medio'?3:.01);if(score>best){best=score;top=[m]}else if(score===best)top.push(m)}return pick(top)}
