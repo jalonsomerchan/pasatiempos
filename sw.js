@@ -1,4 +1,4 @@
-const CACHE = 'pasatiempos-v29';
+const CACHE = 'pasatiempos-v30';
 const ASSETS = [
   "./",
   "./index.html",
